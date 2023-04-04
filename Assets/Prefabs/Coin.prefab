@@ -112,5 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disableOnCollect: 1
   audioSource: {fileID: 0}
+  compareTag: CoinCollector
   _destroyDelay: 5
   collectAmount: 1

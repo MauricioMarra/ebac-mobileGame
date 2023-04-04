@@ -11,6 +11,7 @@ public class PlayerInput : Singleton<PlayerInput>
     [SerializeField] private float _runSpeed;
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
+    [SerializeField] private GameObject _coinCollector;
 
     private float _baseRunSpeed = 5;
     private float _speed = 0.1f;
@@ -51,14 +52,14 @@ public class PlayerInput : Singleton<PlayerInput>
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(_tagObstacle) && !_isInvencible)
-            EndGame();
+        //if (other.gameObject.CompareTag(_tagObstacle) && !_isInvencible && other.)
+        //    EndGame();
 
-        if (other.gameObject.CompareTag(_tagEndLine))
-            EndGame();
+        //if (other.gameObject.CompareTag(_tagEndLine))
+        //    EndGame();
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         _canRun = false;
         _endScreen.SetActive(true);
@@ -99,5 +100,15 @@ public class PlayerInput : Singleton<PlayerInput>
     public void ResetHeight()
     {
         transform.position = new Vector3(transform.position.x, _originalPosition.y, transform.position.z);
+    }
+
+    public bool IsInvencible()
+    {
+        return _isInvencible;
+    }
+
+    public void SetCoinCollectorSize(float value)
+    {
+        _coinCollector.transform.localScale = Vector3.one * value;
     }
 }

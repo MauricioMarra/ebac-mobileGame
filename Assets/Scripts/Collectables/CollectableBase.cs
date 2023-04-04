@@ -7,16 +7,31 @@ public class CollectableBase : MonoBehaviour
     [Header("Sounds")]
     public AudioSource audioSource;
 
-    private string playerTag = "Player";
-    [SerializeField]  private float _destroyDelay = 5.0f;
+    [SerializeField] private string compareTag = "Player";
+    [SerializeField] private float _destroyDelay = 5.0f;
+
+    private bool _collect = false;
+
+    private void Update()
+    {
+        if (_collect)
+        {
+            this.transform.position = Vector3.Lerp(transform.position, PlayerInput.instance.transform.position, .1f);
+            if (Vector3.Distance(transform.position, PlayerInput.instance.transform.position) < 0.7f)
+                HideObject();
+        }
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag(playerTag)) OnCollect();
+        if (collision.CompareTag(compareTag))
+            OnCollect();
     }
 
     protected void Collect()
     {
+        _collect = true;
+
         var collider = this.GetComponent<Collider>();
 
         if (collider != null) 
@@ -28,7 +43,7 @@ public class CollectableBase : MonoBehaviour
             audioSource.Play();
 
         if (_disableOnCollect)
-            this.gameObject.SetActive(false);
+            HideObject();
 
         Destroy(gameObject, _destroyDelay);
     }
@@ -36,5 +51,10 @@ public class CollectableBase : MonoBehaviour
     protected virtual void OnCollect()
     {
         Collect();
+    }
+
+    private void HideObject()
+    {
+        this.gameObject.SetActive(false);
     }
 }
