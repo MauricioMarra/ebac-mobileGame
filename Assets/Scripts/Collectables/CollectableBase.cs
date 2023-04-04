@@ -6,7 +6,7 @@ public class CollectableBase : MonoBehaviour
     public AudioSource audioSource;
 
     private string playerTag = "Player";
-    private float _destroyDelay = 5.0f;
+    [SerializeField]  private float _destroyDelay = 5.0f;
 
     private void OnTriggerEnter(Collider collision)
     {
