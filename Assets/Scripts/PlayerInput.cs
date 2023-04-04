@@ -19,10 +19,12 @@ public class PlayerInput : Singleton<PlayerInput>
     private string _tagObstacle = "Obstacle";
     private string _tagEndLine = "EndLine";
     private TextMeshPro _powerUpText;
+    private Vector3 _originalPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        _originalPosition = transform.position;
         _powerUpText = GetComponentInChildren<TextMeshPro>();
         ResetSpeed();
     }
@@ -87,5 +89,15 @@ public class PlayerInput : Singleton<PlayerInput>
     public void SetPowerUpText(string text)
     {
         _powerUpText.text = text;
+    }
+
+    public void SetHeight(float value)
+    {
+        transform.position = new Vector3(transform.position.x, _originalPosition.y + value, transform.position.z);
+    }
+
+    public void ResetHeight()
+    {
+        transform.position = new Vector3(transform.position.x, _originalPosition.y, transform.position.z);
     }
 }
