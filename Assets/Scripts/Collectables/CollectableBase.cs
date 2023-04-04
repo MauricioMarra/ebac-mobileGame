@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
+    [SerializeField] private bool _disableOnCollect = false;
+
     [Header("Sounds")]
     public AudioSource audioSource;
 
@@ -24,6 +26,9 @@ public class CollectableBase : MonoBehaviour
 
         if (audioSource != null)
             audioSource.Play();
+
+        if (_disableOnCollect)
+            this.gameObject.SetActive(false);
 
         Destroy(gameObject, _destroyDelay);
     }
