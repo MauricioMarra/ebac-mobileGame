@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : Singleton<PlayerInput>
 {
     public Vector3 lastPosition;
 
-    [SerializeField] private float _runSpeed = 2;
+    [SerializeField] private float _runSpeed;
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
 
+    private float _baseRunSpeed = 5;
     private float _speed = 0.1f;
     private bool _canRun = false;
     private string _tagObstacle = "Obstacle";
@@ -19,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetSpeed();
     }
 
     // Update is called once per frame
@@ -62,5 +63,15 @@ public class PlayerInput : MonoBehaviour
         _canRun = true;
         _endScreen.SetActive(false);
         _startScreen.SetActive(false);
+    }
+
+    public void SpeedUp(float value)
+    {
+        _runSpeed *= value;
+    }
+
+    public void ResetSpeed() 
+    {
+        _runSpeed = _baseRunSpeed;
     }
 }
