@@ -10,13 +10,13 @@ public class ItemManager : Singleton<ItemManager>
     private void Start()
     {
         coins.value = 0;
-        this.OnChangeValues.Invoke();
+        //this.OnChangeValues.Invoke();
     }
 
     public void AddCoin(int amount = 1)
     {
         coins.value += amount;
 
-        OnChangeValues.Invoke();
+        //OnChangeValues.Invoke();
     }
 }

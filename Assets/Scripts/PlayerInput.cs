@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,12 +15,15 @@ public class PlayerInput : Singleton<PlayerInput>
     private float _baseRunSpeed = 5;
     private float _speed = 0.1f;
     private bool _canRun = false;
+    private bool _isInvencible = false;
     private string _tagObstacle = "Obstacle";
     private string _tagEndLine = "EndLine";
+    private TextMeshPro _powerUpText;
 
     // Start is called before the first frame update
     void Start()
     {
+        _powerUpText = GetComponentInChildren<TextMeshPro>();
         ResetSpeed();
     }
 
@@ -45,7 +49,7 @@ public class PlayerInput : Singleton<PlayerInput>
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(_tagObstacle))
+        if (other.gameObject.CompareTag(_tagObstacle) && !_isInvencible)
             EndGame();
 
         if (other.gameObject.CompareTag(_tagEndLine))
@@ -73,5 +77,15 @@ public class PlayerInput : Singleton<PlayerInput>
     public void ResetSpeed() 
     {
         _runSpeed = _baseRunSpeed;
+    }
+
+    public void SetInvencible(bool value = true)
+    {
+        _isInvencible = value;
+    }
+
+    public void SetPowerUpText(string text)
+    {
+        _powerUpText.text = text;
     }
 }

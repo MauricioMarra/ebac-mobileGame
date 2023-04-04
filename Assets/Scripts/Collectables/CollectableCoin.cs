@@ -21,6 +21,7 @@ public class CollectableCoin : CollectableBase
 
         ItemManager.instance.AddCoin(collectAmount);
 
-        _animator.SetTrigger(_coinTrigger);
+        if (_animator != null)
+            _animator.SetTrigger(_coinTrigger);
     }
 }
