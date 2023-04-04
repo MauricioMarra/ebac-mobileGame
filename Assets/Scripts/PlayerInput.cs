@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
     public Vector3 lastPosition;
 
     [SerializeField] private float _runSpeed = 2;
+    [SerializeField] private GameObject _endScreen;
+    [SerializeField] private GameObject _startScreen;
 
     private float _speed = 0.1f;
-    private bool _canRun = true;
+    private bool _canRun = false;
     private string _tagObstacle = "Obstacle";
+    private string _tagEndLine = "EndLine";
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,22 @@ public class PlayerInput : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_tagObstacle))
-            _canRun = false;
+            EndGame();
+
+        if (other.gameObject.CompareTag(_tagEndLine))
+            EndGame();
+    }
+
+    private void EndGame()
+    {
+        _canRun = false;
+        _endScreen.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        _canRun = true;
+        _endScreen.SetActive(false);
+        _startScreen.SetActive(false);
     }
 }
