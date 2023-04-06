@@ -9,6 +9,6 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_compareTag) && !PlayerInput.instance.IsInvencible())
-            PlayerInput.instance.EndGame();
+            PlayerInput.instance.EndGame(true);
     }
 }

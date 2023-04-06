@@ -9,6 +9,7 @@ public class PlayerInput : Singleton<PlayerInput>
     public Vector3 lastPosition;
 
     [SerializeField] private float _runSpeed;
+    [SerializeField] private AnimatorManager _animatorManager;
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
     [SerializeField] private GameObject _coinCollector;
@@ -27,7 +28,7 @@ public class PlayerInput : Singleton<PlayerInput>
     {
         _originalPosition = transform.position;
         _powerUpText = GetComponentInChildren<TextMeshPro>();
-        ResetSpeed();
+        _runSpeed = _baseRunSpeed;
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class PlayerInput : Singleton<PlayerInput>
     {
         if (!_canRun) return;
 
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             Move(Input.mousePosition.x - lastPosition.x);
         }
@@ -59,10 +60,20 @@ public class PlayerInput : Singleton<PlayerInput>
         //    EndGame();
     }
 
-    public void EndGame()
+    public void EndGame(bool dead = false)
     {
         _canRun = false;
         _endScreen.SetActive(true);
+
+        if (dead)
+        {
+            _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Death);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - .3f);
+        }
+        else
+        {
+            _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Idle);
+        }
     }
 
     public void StartGame()
@@ -70,16 +81,20 @@ public class PlayerInput : Singleton<PlayerInput>
         _canRun = true;
         _endScreen.SetActive(false);
         _startScreen.SetActive(false);
+
+        _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Run, _runSpeed);
     }
 
     public void SpeedUp(float value)
     {
         _runSpeed *= value;
+        _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Run, _runSpeed);
     }
 
     public void ResetSpeed() 
     {
         _runSpeed = _baseRunSpeed;
+        _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Run, _runSpeed);
     }
 
     public void SetInvencible(bool value = true)
