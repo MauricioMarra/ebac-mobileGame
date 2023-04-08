@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class LevelManager : MonoBehaviour
+{
+    [SerializeField] private List<GameObject> _levelPieces;
+    [SerializeField] private GameObject _startPiece;
+    [SerializeField] private GameObject _endPiece;
+    [SerializeField] private GameObject _levelContainer;
+    
+    private GameObject _currentPiece;
+
+    private float _sizeOfPiece = 10f;
+    private int _numberOfPieces = 10;
+
+    [SerializeField] int pieceIndex = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _currentPiece = Instantiate(_startPiece, _levelContainer.transform);
+        CreateLevel();
+
+        var endPiece = Instantiate(_endPiece, _levelContainer.transform);
+        endPiece.transform.position = _currentPiece.transform.position + new Vector3(0,0,_sizeOfPiece);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void CreateLevelPiece()
+    {
+        var position = Vector3.zero;
+
+        if (_currentPiece != null)
+        {
+            position = new Vector3(_currentPiece.transform.position.x, _currentPiece.transform.position.y, _currentPiece.transform.position.z + _sizeOfPiece);
+        }
+
+        _currentPiece = Instantiate(_levelPieces[Random.Range(0, _levelPieces.Count-1)], _levelContainer.transform);
+        _currentPiece.transform.position = position;
+    }
+
+    private void CreateLevel()
+    {
+        for (var i=0; i< _numberOfPieces - 1; i++)
+        {
+            CreateLevelPiece();
+        }
+    }
+}

@@ -40,7 +40,7 @@ public class PlayerInput : Singleton<PlayerInput>
         {
             Move(Input.mousePosition.x - lastPosition.x);
         }
-        
+
         lastPosition = Input.mousePosition;
 
         transform.Translate(Vector3.forward * Time.deltaTime * _runSpeed);
