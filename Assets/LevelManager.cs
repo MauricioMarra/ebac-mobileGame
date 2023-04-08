@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public SOLevelPiece _levelSetup;
+
     [SerializeField] private List<GameObject> _levelPieces;
     [SerializeField] private GameObject _startPiece;
     [SerializeField] private GameObject _endPiece;
@@ -44,6 +46,15 @@ public class LevelManager : MonoBehaviour
 
         _currentPiece = Instantiate(_levelPieces[Random.Range(0, _levelPieces.Count-1)], _levelContainer.transform);
         _currentPiece.transform.position = position;
+
+        var artObjects = _currentPiece.GetComponentsInChildren<ArtContainer>();
+
+        foreach (var element in artObjects)
+        {
+            var obj = ArtManager.instance.GetArtByType(_levelSetup.ArtType);
+
+            element.ChangeArtGameObject(Instantiate(obj, element.transform));
+        }
     }
 
     private void CreateLevel()
