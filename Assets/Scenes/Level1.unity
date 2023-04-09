@@ -155,13 +155,16 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   materials:
   - {fileID: 2100000, guid: c0cc67e39db61254fb299caa167fe1bf, type: 2}
+  - {fileID: 2100000, guid: 28c6b7e226804d8499a68103218af1d3, type: 2}
   colorSetups:
   - artType: 0
     colors:
     - {r: 0.7272284, g: 1, b: 0.3915094, a: 0}
+    - {r: 0.9811321, g: 0.26062077, b: 0.2082592, a: 0}
   - artType: 1
     colors:
     - {r: 0.9891966, g: 0.6650944, b: 1, a: 0}
+    - {r: 0, g: 0.16342616, b: 1, a: 0}
 --- !u!4 &36734805
 Transform:
   m_ObjectHideFlags: 0
@@ -264,7 +267,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67085394}
-  m_LocalRotation: {x: 0.17945741, y: -0.2265333, z: 0.04250705, w: 0.9563843}
+  m_LocalRotation: {x: 0.17945743, y: -0.2265333, z: 0.042507056, w: 0.9563843}
   m_LocalPosition: {x: 3.99, y: 3.74, z: -7.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1773,7 +1776,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836961685}
-  m_LocalRotation: {x: 0.17945741, y: -0.2265333, z: 0.04250705, w: 0.9563843}
+  m_LocalRotation: {x: 0.17945743, y: -0.2265333, z: 0.042507056, w: 0.9563843}
   m_LocalPosition: {x: 3.99, y: 3.74, z: -7.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
