@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d163bfbefba5144a896997bbcde24d, type: 3}
   m_Name: SOLevel
   m_EditorClassIdentifier: 
-  ArtType: 0
+  ArtType: 1
