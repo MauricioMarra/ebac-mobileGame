@@ -17,6 +17,8 @@ public class CollectableCoin : CollectableBase
 
     protected override void OnCollect()
     {
+        PlayerInput.instance.FlashPlayer();
+
         base.OnCollect();
 
         ItemManager.instance.AddCoin(collectAmount);

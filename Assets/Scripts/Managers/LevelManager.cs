@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
 
     private float _sizeOfPiece = 10f;
     private int _numberOfPieces = 10;
+    private string _endOfPieceString = "EndOfPiece";
 
     [SerializeField] int pieceIndex = 0;
 
@@ -23,6 +24,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         _currentPiece = Instantiate(_startPiece, _levelContainer.transform);
+
         CreateLevel();
 
         var endPiece = Instantiate(_endPiece, _levelContainer.transform);
@@ -41,6 +43,7 @@ public class LevelManager : MonoBehaviour
 
         if (_currentPiece != null)
         {
+            _sizeOfPiece = _currentPiece.transform.Find(_endOfPieceString).transform.localPosition.z;
             position = new Vector3(_currentPiece.transform.position.x, _currentPiece.transform.position.y, _currentPiece.transform.position.z + _sizeOfPiece);
         }
 

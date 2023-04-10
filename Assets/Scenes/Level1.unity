@@ -633,6 +633,8 @@ MonoBehaviour:
   - {fileID: 3624412435213475625, guid: 04f43ea6ecc2bb646a84511682be7993, type: 3}
   - {fileID: 4116279131512990114, guid: 1049b8c5f83687c449a2c778ddaf00a2, type: 3}
   - {fileID: 4116279131512990114, guid: d3ddf87eec27c44419dd803d77d3ea6b, type: 3}
+  - {fileID: 4116279131512990114, guid: c353c52a4fadac24d87ecaa0bd86ff9a, type: 3}
+  - {fileID: 4116279131512990114, guid: 5bbd73e6439096041af456158cf5e26c, type: 3}
   _startPiece: {fileID: 8180522450824228479, guid: acb3b95e273f65841a97184016956db2, type: 3}
   _endPiece: {fileID: 8180522450824228479, guid: e2eb3a374e1097a4e982b30551898ba2, type: 3}
   _levelContainer: {fileID: 710387845}
@@ -2318,6 +2320,7 @@ GameObject:
   - component: {fileID: 1394504557}
   - component: {fileID: 1394504553}
   - component: {fileID: 1394504558}
+  - component: {fileID: 1394504559}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2441,6 +2444,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1394504559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394504552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9cb2f5124b448438012583dfb89dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 1
+  _flashDuration: 0.05
+  _flashScaleFactor: 1.4
 --- !u!4 &1418385815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 900896601623072016, guid: 529aa5af26e66fe4eba835f58c331272, type: 3}
