@@ -8,6 +8,7 @@ public class PowerUpBase : CollectableBase
 
     protected override void OnCollect()
     {
+        PlayerInput.instance.FlashPlayer();
         StartPowerUp();
         base.OnCollect();
     }
