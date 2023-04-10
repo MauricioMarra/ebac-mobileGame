@@ -22,6 +22,7 @@ public class PlayerInput : Singleton<PlayerInput>
     private string _tagEndLine = "EndLine";
     private TextMeshPro _powerUpText;
     private Vector3 _originalPosition;
+    private ScaleHelper _scaleHelper;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class PlayerInput : Singleton<PlayerInput>
         _originalPosition = transform.position;
         _powerUpText = GetComponentInChildren<TextMeshPro>();
         _runSpeed = _baseRunSpeed;
+        _scaleHelper = GetComponent<ScaleHelper>();
     }
 
     // Update is called once per frame
@@ -125,5 +127,11 @@ public class PlayerInput : Singleton<PlayerInput>
     public void SetCoinCollectorSize(float value)
     {
         _coinCollector.transform.localScale = Vector3.one * value;
+    }
+
+    public void FlashPlayer()
+    {
+        if(_scaleHelper != null)
+            _scaleHelper.FlashScale();
     }
 }
