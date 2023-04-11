@@ -9,8 +9,14 @@ public class CollectableBase : MonoBehaviour
 
     [SerializeField] private string compareTag = "Player";
     [SerializeField] private float _destroyDelay = 5.0f;
+    private MeshRenderer _mesh;
 
     private bool _collect = false;
+
+    private void Start()
+    {
+        _mesh = GetComponent<MeshRenderer>();
+    }
 
     private void Update()
     {
@@ -55,6 +61,7 @@ public class CollectableBase : MonoBehaviour
 
     private void HideObject()
     {
-        this.gameObject.SetActive(false);
+        if(_mesh != null)
+            _mesh.enabled = false;
     }
 }

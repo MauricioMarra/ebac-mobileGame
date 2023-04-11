@@ -13,6 +13,7 @@ public class PlayerInput : Singleton<PlayerInput>
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
     [SerializeField] private GameObject _coinCollector;
+    [SerializeField] private GameObject _trailRenderer;
     [SerializeField] private ParticleSystem _deathExplosion;
 
     private float _baseRunSpeed = 5;
@@ -38,6 +39,8 @@ public class PlayerInput : Singleton<PlayerInput>
     void Update()
     {
         if (!_canRun) return;
+
+        _trailRenderer.SetActive(true);
 
         if (Input.GetMouseButton(0))
         {
@@ -67,6 +70,7 @@ public class PlayerInput : Singleton<PlayerInput>
     {
         _canRun = false;
         _endScreen.SetActive(true);
+        _trailRenderer.SetActive(false);
 
         if (dead)
         {

@@ -10,6 +10,8 @@ public class CollectableCoin : CollectableBase
     private Animator _animator;
     private string _coinTrigger = "collect";
 
+    [SerializeField] ParticleSystem _collectVFX;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -17,6 +19,9 @@ public class CollectableCoin : CollectableBase
 
     protected override void OnCollect()
     {
+        if(_collectVFX != null)
+            _collectVFX.Play();
+
         PlayerInput.instance.FlashPlayer();
 
         base.OnCollect();
