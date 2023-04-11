@@ -13,6 +13,7 @@ public class PlayerInput : Singleton<PlayerInput>
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
     [SerializeField] private GameObject _coinCollector;
+    [SerializeField] private ParticleSystem _deathExplosion;
 
     private float _baseRunSpeed = 5;
     private float _speed = 0.1f;
@@ -69,6 +70,9 @@ public class PlayerInput : Singleton<PlayerInput>
 
         if (dead)
         {
+            if(_deathExplosion != null)
+                _deathExplosion.Play();
+
             _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Death);
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - .3f);
         }
