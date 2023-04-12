@@ -13,6 +13,8 @@ public class PlayerInput : Singleton<PlayerInput>
     [SerializeField] private GameObject _endScreen;
     [SerializeField] private GameObject _startScreen;
     [SerializeField] private GameObject _coinCollector;
+    [SerializeField] private GameObject _trailRenderer;
+    [SerializeField] private ParticleSystem _deathExplosion;
 
     private float _baseRunSpeed = 5;
     private float _speed = 0.1f;
@@ -22,6 +24,7 @@ public class PlayerInput : Singleton<PlayerInput>
     private string _tagEndLine = "EndLine";
     private TextMeshPro _powerUpText;
     private Vector3 _originalPosition;
+    private Vector3 _bounds = new Vector3(2,0,0);
     private ScaleHelper _scaleHelper;
 
     // Start is called before the first frame update
@@ -37,6 +40,13 @@ public class PlayerInput : Singleton<PlayerInput>
     void Update()
     {
         if (!_canRun) return;
+
+        _trailRenderer.SetActive(true);
+
+        if (transform.position.x < -_bounds.x)
+            transform.position = new Vector3(-_bounds.x, this.transform.position.y, this.transform.position.z);
+        else if (transform.position.x > _bounds.x)
+            transform.position = new Vector3(_bounds.x, this.transform.position.y, this.transform.position.z);
 
         if (Input.GetMouseButton(0))
         {
@@ -66,9 +76,13 @@ public class PlayerInput : Singleton<PlayerInput>
     {
         _canRun = false;
         _endScreen.SetActive(true);
+        _trailRenderer.SetActive(false);
 
         if (dead)
         {
+            if(_deathExplosion != null)
+                _deathExplosion.Play();
+
             _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Death);
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - .3f);
         }

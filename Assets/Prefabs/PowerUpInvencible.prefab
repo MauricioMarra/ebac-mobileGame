@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e827795ae614e2f41bacb7436c8236ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _disableOnCollect: 0
+  _disableOnCollect: 1
   audioSource: {fileID: 0}
   compareTag: Player
   _destroyDelay: 5
