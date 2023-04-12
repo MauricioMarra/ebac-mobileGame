@@ -24,6 +24,7 @@ public class PlayerInput : Singleton<PlayerInput>
     private string _tagEndLine = "EndLine";
     private TextMeshPro _powerUpText;
     private Vector3 _originalPosition;
+    private Vector3 _bounds = new Vector3(2,0,0);
     private ScaleHelper _scaleHelper;
 
     // Start is called before the first frame update
@@ -41,6 +42,11 @@ public class PlayerInput : Singleton<PlayerInput>
         if (!_canRun) return;
 
         _trailRenderer.SetActive(true);
+
+        if (transform.position.x < -_bounds.x)
+            transform.position = new Vector3(-_bounds.x, this.transform.position.y, this.transform.position.z);
+        else if (transform.position.x > _bounds.x)
+            transform.position = new Vector3(_bounds.x, this.transform.position.y, this.transform.position.z);
 
         if (Input.GetMouseButton(0))
         {
