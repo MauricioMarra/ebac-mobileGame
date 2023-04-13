@@ -4,6 +4,7 @@ using DG.Tweening;
 
 public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    private ScreenBase _parentScreen;
     private Vector3 _originalScale;
     private Tween _currentTween;
     private float _scaleUpFactor = 1.3f;
@@ -13,6 +14,7 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private void Start()
     {
         _originalScale = this.transform.localScale;
+        _parentScreen = GetComponentInParent<ScreenBase>();
     }
 
     private void OnDisable()
@@ -45,5 +47,7 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             _currentTween.Kill();
 
         ScaleDownButton();
+
+        _parentScreen.Close(_duration);
     }
 }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 public class ScreenBase : MonoBehaviour
 {
     private List<Button> _listOfButtons = new List<Button>();
+    private Vector3 _originalScale;
+    private float _duration = 0.4f;
 
     private void OnValidate()
     {
@@ -23,11 +26,22 @@ public class ScreenBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _originalScale = transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Show()
+    {
+        this.transform.DOScale(_originalScale, _duration);
+    }
+
+    public void Close(float delay = 0f)
+    {
+        this.transform.DOScale(Vector3.zero, _duration).SetDelay(delay);
     }
 }
