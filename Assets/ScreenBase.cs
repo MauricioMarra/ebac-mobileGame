@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ScreenBase : MonoBehaviour
 {
+    [SerializeField] public TypeOfScreen _screenType { get; private set; }
+
     private List<Button> _listOfButtons = new List<Button>();
     private Vector3 _originalScale;
     private float _duration = 0.4f;
@@ -44,4 +46,11 @@ public class ScreenBase : MonoBehaviour
     {
         this.transform.DOScale(Vector3.zero, _duration).SetDelay(delay);
     }
+}
+
+public enum TypeOfScreen
+{
+    Start,
+    End,
+    About
 }
