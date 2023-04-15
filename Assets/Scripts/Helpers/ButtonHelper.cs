@@ -11,9 +11,13 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private float _duration = 0.4f;
     private bool _isButtonClicked = false;
 
+    private void Awake()
+    {
+        _originalScale = this.transform.localScale;    
+    }
+
     private void Start()
     {
-        _originalScale = this.transform.localScale;
         _parentScreen = GetComponentInParent<ScreenBase>();
     }
 
@@ -34,20 +38,25 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             _currentTween = this.transform.DOScale(_originalScale, _duration);
     }
 
-    private void ScaleDownButton()
+    public void ScaleDownButton(float delay = 0)
     {
-        this.transform.DOScale(Vector3.zero, _duration);
+        this.transform.DOScale(Vector3.zero, _duration).SetDelay(delay);
+    }
+
+    public void ScaleUpButton(float delay = 0)
+    {
+        this.transform.DOScale(_originalScale, _duration).SetDelay(delay);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         _isButtonClicked = true;
 
-        if (_currentTween != null)
-            _currentTween.Kill();
+        //if (_currentTween != null)
+        //    _currentTween.Kill();
 
-        ScaleDownButton();
+        //ScaleDownButton();
 
-        _parentScreen.Close(_duration);
+        //_parentScreen.Close(_duration);
     }
 }

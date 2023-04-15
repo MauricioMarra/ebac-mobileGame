@@ -14,7 +14,7 @@ public class MenuManager : Singleton<MenuManager>
     void Start()
     {
         _currentScreen = FindScreenByType(TypeOfScreen.Start);
-        _currentScreen.Show();
+        _currentScreen.Show(.2f);
     }
 
     public ScreenBase FindScreenByType(TypeOfScreen typeOfScreen)
@@ -27,8 +27,8 @@ public class MenuManager : Singleton<MenuManager>
         var a = (TypeOfScreen)1;
         _nextScreen = FindScreenByType(typeOfScreen);
 
-        _currentScreen.Close();
-        _nextScreen.Show();
+        _currentScreen.Close(.2f);
+        _nextScreen.Show(.2f);
 
         _currentScreen = _nextScreen;
     }

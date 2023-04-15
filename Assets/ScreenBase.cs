@@ -26,7 +26,7 @@ public class ScreenBase : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _originalScale = transform.localScale;
     }
@@ -37,14 +37,20 @@ public class ScreenBase : MonoBehaviour
         
     }
 
-    public void Show()
+    public void Show(float delay = 0f)
     {
-        this.transform.DOScale(_originalScale, _duration);
+        for(int i=0; i< _listOfButtons.Count; i++)
+        {
+            _listOfButtons[i].GetComponent<ButtonHelper>().ScaleUpButton(i * delay);
+        }
     }
 
     public void Close(float delay = 0f)
     {
-        this.transform.DOScale(Vector3.zero, _duration).SetDelay(delay);
+        for (int i = 0; i < _listOfButtons.Count; i++)
+        {
+            _listOfButtons[i].GetComponent<ButtonHelper>().ScaleDownButton(i * delay);
+        }
     }
 }
 
