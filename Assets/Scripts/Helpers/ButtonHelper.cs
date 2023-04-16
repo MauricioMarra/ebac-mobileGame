@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private ScreenBase _parentScreen;
     private Vector3 _originalScale;
@@ -28,14 +28,12 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!_isButtonClicked)
-            _currentTween = this.transform.DOScale(_originalScale * _scaleUpFactor, _duration);
+        _currentTween = this.transform.DOScale(_originalScale * _scaleUpFactor, _duration);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!_isButtonClicked)
-            _currentTween = this.transform.DOScale(_originalScale, _duration);
+        _currentTween = this.transform.DOScale(_originalScale, _duration);
     }
 
     public void ScaleDownButton(float delay = 0)
@@ -46,17 +44,5 @@ public class ButtonHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void ScaleUpButton(float delay = 0)
     {
         this.transform.DOScale(_originalScale, _duration).SetDelay(delay);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        _isButtonClicked = true;
-
-        //if (_currentTween != null)
-        //    _currentTween.Kill();
-
-        //ScaleDownButton();
-
-        //_parentScreen.Close(_duration);
     }
 }

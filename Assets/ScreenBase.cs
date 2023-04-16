@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ScreenBase : MonoBehaviour
 {
-    [SerializeField] public TypeOfScreen _screenType { get; private set; }
+    [SerializeField] private TypeOfScreen _screenType;
 
     private List<Button> _listOfButtons = new List<Button>();
     private Vector3 _originalScale;
@@ -39,18 +39,24 @@ public class ScreenBase : MonoBehaviour
 
     public void Show(float delay = 0f)
     {
-        for(int i=0; i< _listOfButtons.Count; i++)
+        int i = 0;
+
+        //This gets every child inside this game object
+        //List<Transform> listOfItem = GetComponentsInChildren<Transform>().ToList();
+
+        //This gets only the first child of each child inside this game object.
+        foreach (Transform t in transform)
         {
-            _listOfButtons[i].GetComponent<ButtonHelper>().ScaleUpButton(i * delay);
+            t.DOScale(0, _duration).From().SetDelay(i * delay);
+            i++;
         }
+
+        i = 0;
     }
 
-    public void Close(float delay = 0f)
+    public TypeOfScreen GetTypeOfScreen()
     {
-        for (int i = 0; i < _listOfButtons.Count; i++)
-        {
-            _listOfButtons[i].GetComponent<ButtonHelper>().ScaleDownButton(i * delay);
-        }
+        return _screenType;
     }
 }
 

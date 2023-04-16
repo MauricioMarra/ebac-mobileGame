@@ -15,12 +15,11 @@ public class PowerUpBase : CollectableBase
 
     protected virtual void StartPowerUp()
     {
-        Debug.Log("StartPowerUp");
         Invoke(nameof(EndPowerUp), _powerUpDuration);
     }
 
     protected virtual void EndPowerUp()
     {
-        Debug.Log("EndPowerUp");
+        
     }
 }
