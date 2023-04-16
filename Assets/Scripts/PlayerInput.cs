@@ -26,6 +26,7 @@ public class PlayerInput : Singleton<PlayerInput>
     private Vector3 _originalPosition;
     private Vector3 _bounds = new Vector3(2,0,0);
     private ScaleHelper _scaleHelper;
+    private AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class PlayerInput : Singleton<PlayerInput>
         _powerUpText = GetComponentInChildren<TextMeshPro>();
         _runSpeed = _baseRunSpeed;
         _scaleHelper = GetComponent<ScaleHelper>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -82,6 +84,9 @@ public class PlayerInput : Singleton<PlayerInput>
         {
             if(_deathExplosion != null)
                 _deathExplosion.Play();
+
+            if(_audioSource != null)
+                _audioSource.Play();
 
             _animatorManager.PlayAnimation(AnimatorManager.AnimationType.Death);
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - .3f);

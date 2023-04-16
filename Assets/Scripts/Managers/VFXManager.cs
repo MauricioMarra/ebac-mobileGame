@@ -14,7 +14,7 @@ public class VFXManager : Singleton<VFXManager>
         {
             if (effect.vfxType == vfxType)
             {
-                var x = Instantiate(effect.particleSystem, position, Quaternion.identity);
+                var x = Instantiate(effect.particleSystem, position, Quaternion.identity, Camera.main.transform);
                 x.Play();
                 Destroy(x.gameObject, _lifetime);
                 break;
@@ -26,7 +26,8 @@ public class VFXManager : Singleton<VFXManager>
 public enum VfxType
 {
     Jump,
-    Collect
+    Collect,
+    Click
 }
 
 [System.Serializable]
