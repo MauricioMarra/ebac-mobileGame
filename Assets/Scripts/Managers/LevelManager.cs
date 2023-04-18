@@ -47,7 +47,8 @@ public class LevelManager : MonoBehaviour
             position = new Vector3(_currentPiece.transform.position.x, _currentPiece.transform.position.y, _currentPiece.transform.position.z + _sizeOfPiece);
         }
 
-        _currentPiece = Instantiate(_levelPieces[Random.Range(0, _levelPieces.Count)], _levelContainer.transform);
+        //_currentPiece = Instantiate(_levelPieces[Random.Range(0, _levelPieces.Count)], _levelContainer.transform);
+        _currentPiece = Instantiate(_levelPieces.CreateRandomObjectFromList(), _levelContainer.transform);
         _currentPiece.transform.position = position;
 
         var artObjects = _currentPiece.GetComponentsInChildren<ArtContainer>();
